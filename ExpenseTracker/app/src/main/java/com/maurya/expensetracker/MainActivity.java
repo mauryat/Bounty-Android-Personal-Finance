@@ -1,21 +1,21 @@
 package com.maurya.expensetracker;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import com.maurya.expensetracker.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
-//    public static ArrayList<Double> expenseList;
-//    public static double income;
+    public static ArrayList<Double> expenseList;
+    public static double income;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    public static Data data;
+//    public static Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,17 +41,11 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         tabLayout.setOnTabSelectedListener(this);
 
-        ActivityMainBinding binding =
-                DataBindingUtil.setContentView(this, R.layout.activity_main);
-        data = new Data();
-        binding.setData(data);
+//        data = new Data();
+        expenseList = new ArrayList<Double>();
 
 //        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 //        v.vibrate(3000);
-    }
-
-    void setIncome() {
-
     }
 
     @Override

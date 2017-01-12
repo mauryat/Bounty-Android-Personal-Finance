@@ -29,7 +29,7 @@ public class ReportTab extends Fragment {
 
         if(isVisibleToUser) {
             double totalExpenditure = 0;
-            for (double expense : MainActivity.data.expenseList) {
+            for (double expense : MainActivity.expenseList) {
                 totalExpenditure += expense;
             }
             String message = Double.toString(totalExpenditure);

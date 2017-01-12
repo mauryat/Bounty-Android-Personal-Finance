@@ -81,20 +81,20 @@ public class IncomeTab extends Fragment {
         if(incomeStr.length() > 0) {
             double income = Double.parseDouble(incomeStr);
             if (income > 0) {
-                MainActivity.data.setIncome(income);
-//                TextView textView = (TextView) rootView.findViewById(R.id.text_income);
-//                textView.setText(incomeStr);
+                MainActivity.income = income;
+                TextView textView = (TextView) rootView.findViewById(R.id.text_income);
+                textView.setText(incomeStr);
             }
         }
     }
 
-//    @Override
-//    public void setUserVisibleHint(boolean isVisibleToUser) {
-//        super.setUserVisibleHint(isVisibleToUser);
-//
-//        if(isVisibleToUser) {
-//            TextView textView = (TextView) rootView.findViewById(R.id.text_income);
-//            textView.setText(String.valueOf(MainActivity.income));
-//        }
-//    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(isVisibleToUser && rootView != null) {
+            TextView textView = (TextView) rootView.findViewById(R.id.text_income);
+            textView.setText(String.valueOf(MainActivity.income));
+        }
+    }
 }
