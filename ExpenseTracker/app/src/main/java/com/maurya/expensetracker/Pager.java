@@ -20,9 +20,12 @@ public class Pager extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                IncomeTab incomeTab = new IncomeTab();
+                return incomeTab;
+            case 1:
                 ExpensesTab expensesTab = new ExpensesTab();
                 return expensesTab;
-            case 1:
+            case 2:
                 ReportTab reportTab = new ReportTab();
                 return reportTab;
             default:
@@ -37,10 +40,12 @@ public class Pager extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position == 0) {
-            return "Expenses";
-        } else {
-            return "Report";
+        switch (position) {
+            case 0: return "Income";
+            case 1: return "Expenses";
+            case 2: return "Report";
+            default:
+                return null;
         }
     }
 }

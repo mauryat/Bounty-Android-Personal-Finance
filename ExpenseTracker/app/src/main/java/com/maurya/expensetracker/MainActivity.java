@@ -1,33 +1,21 @@
 package com.maurya.expensetracker;
 
+import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.KeyEvent;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
+import com.maurya.expensetracker.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
 
-    public static ArrayList<Double> expenseList;
+//    public static ArrayList<Double> expenseList;
+//    public static double income;
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    public static Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +27,10 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
-        tabLayout.addTab(tabLayout.newTab().setText("Expenses"));
+        tabLayout.addTab(tabLayout.newTab().setText("Income"));
+        tabLayout.addTab(tabLayout.newTab().setText("Expenditure"));
         tabLayout.addTab(tabLayout.newTab().setText("Report"));
+
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
@@ -51,7 +41,17 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         tabLayout.setOnTabSelectedListener(this);
 
-        expenseList = new ArrayList<Double>();
+        ActivityMainBinding binding =
+                DataBindingUtil.setContentView(this, R.layout.activity_main);
+        data = new Data();
+        binding.setData(data);
+
+//        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+//        v.vibrate(3000);
+    }
+
+    void setIncome() {
+
     }
 
     @Override

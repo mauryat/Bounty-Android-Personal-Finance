@@ -9,40 +9,36 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 /**
  * Created by maurya on 1/12/17.
  */
-public class ExpensesTab extends Fragment {
+public class IncomeTab extends Fragment {
 
-    private ArrayAdapter expenseArrayAdapter;
+    private View rootView;
     private EditText textBox;
     private Button submitButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View rootView = inflater.inflate(R.layout.expenses_tab, container, false);
+        rootView = inflater.inflate(R.layout.income_tab, container, false);
 
-        submitButton = (Button) rootView.findViewById(R.id.submit_expense);
+        submitButton = (Button) rootView.findViewById(R.id.submit_income);
 
         submitButton
                 .setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        registerMoneySpent(rootView);
+                        registerIncome(rootView);
                     }
                 });
 
-        ListView listView = (ListView) rootView.findViewById(R.id.list_view);
-        expenseArrayAdapter = new ArrayAdapter<Double>(getContext(), R.layout.activity_list_view, MainActivity.data.expenseList);
-        listView.setAdapter(expenseArrayAdapter);
-
-        textBox = (EditText) rootView.findViewById(R.id.edit_money_spent);
+        textBox = (EditText) rootView.findViewById(R.id.edit_income);
         textBox.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -77,17 +73,28 @@ public class ExpensesTab extends Fragment {
         submitButton.setEnabled(isReady);
     }
 
-    public void registerMoneySpent(View view) {
-        EditText editText = (EditText) view.findViewById(R.id.edit_money_spent);
-        String expenseStr = editText.getText().toString();
+    public void registerIncome(View view) {
+        EditText editText = (EditText) view.findViewById(R.id.edit_income);
+        String incomeStr = editText.getText().toString();
         editText.setText("");
 
-        if(expenseStr.length() > 0) {
-            double expense = Double.parseDouble(expenseStr);
-            if (expense > 0) {
-                MainActivity.data.expenseList.add(expense);
-                expenseArrayAdapter.notifyDataSetChanged();
+        if(incomeStr.length() > 0) {
+            double income = Double.parseDouble(incomeStr);
+            if (income > 0) {
+                MainActivity.data.setIncome(income);
+//                TextView textView = (TextView) rootView.findViewById(R.id.text_income);
+//                textView.setText(incomeStr);
             }
         }
     }
+
+//    @Override
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//
+//        if(isVisibleToUser) {
+//            TextView textView = (TextView) rootView.findViewById(R.id.text_income);
+//            textView.setText(String.valueOf(MainActivity.income));
+//        }
+//    }
 }
