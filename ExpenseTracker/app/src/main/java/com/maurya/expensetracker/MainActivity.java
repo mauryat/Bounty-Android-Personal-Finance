@@ -12,8 +12,6 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     public static ArrayList<Double> expenseList;
     public static double income;
-
-    private TabLayout tabLayout;
     private ViewPager viewPager;
 //    public static Data data;
 
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabLayout);
 
         tabLayout.addTab(tabLayout.newTab().setText("Income"));
         tabLayout.addTab(tabLayout.newTab().setText("Expenditure"));
