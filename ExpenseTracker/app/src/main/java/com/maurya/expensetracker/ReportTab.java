@@ -31,14 +31,9 @@ public class ReportTab extends Fragment {
 
         PieChart pieChart = (PieChart) rootView.findViewById(R.id.chart);
 
-        double totalExpenditure = 0;
-        for(double expense: MainActivity.expenseList) {
-            totalExpenditure += expense;
-        }
-
         ArrayList<Entry> entries = new ArrayList<>();
-        entries.add(new Entry((float) MainActivity.income, 0));
-        entries.add(new Entry((float) totalExpenditure, 0));
+        entries.add(new Entry((float) MainActivity.data.getIncome(), 0));
+        entries.add(new Entry((float) MainActivity.data.totalExpenditure(), 0));
 
         PieDataSet dataset = new PieDataSet(entries, "Expenditure vs Income");
 
@@ -61,11 +56,7 @@ public class ReportTab extends Fragment {
         super.setUserVisibleHint(isVisibleToUser);
 
         if(isVisibleToUser) {
-            double totalExpenditure = 0;
-            for (double expense : MainActivity.expenseList) {
-                totalExpenditure += expense;
-            }
-            String message = Double.toString(totalExpenditure);
+            String message = Double.toString(MainActivity.data.totalExpenditure());
             TextView textView = (TextView) rootView.findViewById(R.id.total_expenditure);
             textView.setTextSize(40);
             textView.setText(message);

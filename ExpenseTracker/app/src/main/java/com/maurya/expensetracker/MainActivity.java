@@ -1,19 +1,21 @@
 package com.maurya.expensetracker;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
+public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener, Observer {
 
-    public static ArrayList<Double> expenseList;
-    public static double income;
     private ViewPager viewPager;
-//    public static Data data;
+    public static Data data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +41,8 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
         tabLayout.setOnTabSelectedListener(this);
 
-//        data = new Data();
-        expenseList = new ArrayList<Double>();
-
-//        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-//        v.vibrate(3000);
+        data = new Data();
+        data.addObserver(this);
     }
 
     @Override
@@ -59,5 +58,16 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     @Override
     public void onTabReselected(TabLayout.Tab tab) {
 
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        double income = ((Data) o).getIncome();
+        double totalExpenditure = data.totalExpenditure();
+
+        if(totalExpenditure > income) {
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            v.vibrate(3000);
+        }
     }
 }

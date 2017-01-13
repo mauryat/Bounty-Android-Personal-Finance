@@ -39,7 +39,7 @@ public class ExpensesTab extends Fragment {
                 });
 
         ListView listView = (ListView) rootView.findViewById(R.id.list_view);
-        expenseArrayAdapter = new ArrayAdapter<Double>(getContext(), R.layout.activity_list_view, MainActivity.expenseList);
+        expenseArrayAdapter = new ArrayAdapter<Double>(getContext(), R.layout.activity_list_view, MainActivity.data.getExpenseList());
         listView.setAdapter(expenseArrayAdapter);
 
         textBox = (EditText) rootView.findViewById(R.id.edit_money_spent);
@@ -85,7 +85,7 @@ public class ExpensesTab extends Fragment {
         if(expenseStr.length() > 0) {
             double expense = Double.parseDouble(expenseStr);
             if (expense > 0) {
-                MainActivity.expenseList.add(expense);
+                MainActivity.data.addExpense(expense);
                 expenseArrayAdapter.notifyDataSetChanged();
             }
         }

@@ -81,7 +81,7 @@ public class IncomeTab extends Fragment {
         if(incomeStr.length() > 0) {
             double income = Double.parseDouble(incomeStr);
             if (income > 0) {
-                MainActivity.income = income;
+                MainActivity.data.setIncome(income);
                 TextView textView = (TextView) rootView.findViewById(R.id.text_income);
                 textView.setText(incomeStr);
             }
@@ -94,7 +94,7 @@ public class IncomeTab extends Fragment {
 
         if(isVisibleToUser && rootView != null) {
             TextView textView = (TextView) rootView.findViewById(R.id.text_income);
-            textView.setText(String.valueOf(MainActivity.income));
+            textView.setText(String.valueOf(MainActivity.data.getIncome()));
         }
     }
 }
